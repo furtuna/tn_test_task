@@ -1,0 +1,6 @@
+/.idea/
+/vendor/
+/cache/*
+/data/*
+!cache/.gitkeep
+!data/.gitkeep
