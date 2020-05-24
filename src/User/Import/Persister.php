@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PFC\Demo\SimpleUserImport\User\Import;
 
@@ -28,16 +28,16 @@ class Persister implements PersisterInterface
 
     /**
      * @param Connection $connection
-     * @param UserRepository $dbRepository
+     * @param UserRepository $UserRepository
      * @param UserImportDataTransferToUserModelMapper $mapper
      */
     public function __construct(
         Connection $connection,
-        UserRepository $dbRepository,
+        UserRepository $UserRepository,
         UserImportDataTransferToUserModelMapper $mapper
     ) {
         $this->connection = $connection;
-        $this->dbRepository = $dbRepository;
+        $this->dbRepository = $UserRepository;
         $this->mapper = $mapper;
     }
 
@@ -85,19 +85,18 @@ class Persister implements PersisterInterface
     }
 
     /**
-     * @param object $object
+     * @param mixed $object
      *
      * @return UserDataTransfer
      *
      * @throws WriterException
      */
-    private function requireUserDataTransfer(object $object): UserDataTransfer
+    private function requireUserDataTransfer($object): UserDataTransfer
     {
         if (!$object instanceof UserDataTransfer) {
             throw new WriterException(sprintf(
-                'Instance of "%s" expected, but instance of "%s" passed',
-                UserDataTransfer::class,
-                get_class($object)
+                'Instance of "%s" expected.',
+                UserDataTransfer::class
             ));
         }
 

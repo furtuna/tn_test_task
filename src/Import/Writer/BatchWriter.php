@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PFC\Demo\SimpleUserImport\Import\Writer;
 
@@ -82,17 +82,16 @@ class BatchWriter implements WriterInterface
     }
 
     /**
-     * @param object $object
+     * @param mixed $object
      *
      * @throws WriterException
      */
-    private function requireDataTransfer(object $object): void
+    private function requireDataTransfer($object): void
     {
         if (!$object instanceof DataTransferInterface) {
             throw new WriterException(sprintf(
-                'Instance of "%s" expected, but instance of "%s" passed',
-                DataTransferInterface::class,
-                get_class($object)
+                'Instance of "%s" expected.',
+                DataTransferInterface::class
             ));
         }
     }
